@@ -28,7 +28,7 @@ def about_us_event(event):
         sticker_ID='10551378'
     )
 
-    about_us_img = 'https://i.imgur.com/70A4wdI.jpg'
+    about_us_img = 'https://i.imgur.com/tAR8Rus.jpg'
 
     image_message = ImageSendMessage(
         original_content_url = about_us_img,
