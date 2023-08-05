@@ -1,25 +1,12 @@
 from flask import Flask, request, abort
+ 
+ 
+from events.basic import*
+from line_bot_api import*
 
-# from events.basic import*
-# from line_bot_api import*
 
 
 
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, FollowEvent, UnfollowEvent, StickerSendMessage, ImageSendMessage, LocationSendMessage
-)
-
-#Channel access token
-line_bot_api = LineBotApi ('UgMewg7JZ2k2AIOmQpUtjZmPFpcUXcZKlCGrpnFeZCSI0qksZ/emxXHPXpRNhMA1oW+yxTlgf/vbRGW9UwIQ1Zfz6vn08MhwMy4SPZ6IIm7er1fXswofmsN+hZNJDvgDftUeYPIpNA1WuJWqRVTFBgdB04t89/1O/w1cDnyilFU=')
-
-#Channel secret
-handler = WebhookHandler ('29b000701b7fd5e56d1c9a0c8241b3f0')
 
 app = Flask(__name__)
 
@@ -38,3 +25,17 @@ def callback():
         abort(400)
 
     return 'OK'
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+
+    message_text = str(event.message.text).lower()
+
+    if message_text == '@關於我們':
+        about_us_event(event)
+
+    elif message_text == '@營業據點':
+        location_event(event)
+
+if __name__ =='__main__':
+    app.run()
