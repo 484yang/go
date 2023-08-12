@@ -37,5 +37,26 @@ def handle_message(event):
     elif message_text == '@營業據點':
         location_event(event)
 
+
+
+@handler.add(FollowEvent)
+def handle_follow(event):
+    welcome_msg = """ 你好我是 歡迎你成為 XXX每架俱樂部會員 !
+我是XXX美甲俱樂部 的小幫手
+-想直接預約 線上美甲服務 可直接點選下方
+-[你的小幫手]選單功能
+    
+-期待你的光臨!"""
+
+
+    line_bot_api.reply_message(
+        event.reply_toke,
+        TextSendMessage(text=welcome_msg))
+    
+@handler.add(UnfollowEvent)
+def handle_unfollow(event):
+    print(event)
+    
+
 if __name__ =='__main__':
     app.run()
