@@ -2,4 +2,4 @@ line-bot-sdk
 flask
 requests
 gunicorn
-urllib
+urllib3==1.26.7
