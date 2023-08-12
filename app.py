@@ -50,7 +50,7 @@ def handle_follow(event):
 
 
     line_bot_api.reply_message(
-        event.reply_toke,
+        event.reply_token,
         TextSendMessage(text=welcome_msg))
     
 @handler.add(UnfollowEvent)
