@@ -41,7 +41,12 @@ def handle_message(event):
     elif message_text == '@預約服務':
         service_category_event(event)
 
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    data = dict(parse_qsl(event.postback.data))
 
+    if data.get('action') == 'service':
+        service_event(event)
 
 @handler.add(FollowEvent)
 def handle_follow(event):
