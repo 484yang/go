@@ -6,7 +6,7 @@ services = {
 
     1:{
         'category':'美甲單色',
-        'img_ur1':'https://i.imgur.com/okeVTFf.jpg',
+        'img_url':'https://i.imgur.com/okeVTFf.jpg',
         'title' : 'sdf' ,
         'duration' : 'sdf',
         'description' : 'sdf',
@@ -16,7 +16,7 @@ services = {
 
     1:{
         'category':'美甲單色',
-        'img_ur1':'https://i.imgur.com/okeVTFf.jpg',
+        'img_url':'https://i.imgur.com/okeVTFf.jpg',
         'title' : 'sdf' ,
         'duration' : 'sdf',
         'description' : 'sdf',
@@ -36,7 +36,7 @@ def service_category_event(event):
         template=ImageCarouselTemplate(
             columns=[
                 ImageCarouselTemplate(
-                    image_ur1='https://i.imgur.com/okeVTFf.jpg',
+                    image_url='https://i.imgur.com/okeVTFf.jpg',
                     action=PostbackAction(
                         label='按摩調理',
                         display_text='想了解按摩調理',
@@ -44,7 +44,7 @@ def service_category_event(event):
                     )
                 ),
                 ImageCarouselColumn(
-                    image_ur1='https://i.imgur.com/okeVTFf.jpg',
+                    image_url='https://i.imgur.com/okeVTFf.jpg',
                     action=PostbackAction(
                         label='按摩調理',
                         display_text='想了解按摩調理',
