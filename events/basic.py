@@ -19,11 +19,11 @@ def about_us_event(event):
     ]
     text_message = TextSendMessage(text="""$ Master SPA $
 指甲選購 買五送一
-                                   
+
 -長短都可 加購50元 試甲片有保障
-                                   
+
 -長期美裝櫃姐配合有折扣
-                                   
+
 -好友推薦 請輸入 ID。""", emojis=emoji) 
     
     sticker_message = StickerSendMessage(

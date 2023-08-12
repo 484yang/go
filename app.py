@@ -1,9 +1,9 @@
 from flask import Flask, request, abort
  
- 
+from events.service import *
 from events.basic import*
 from line_bot_api import*
-from events.service import service_category_event
+
 
 
 
@@ -39,7 +39,7 @@ def handle_message(event):
         location_event(event)
 
     elif message_text == '@預約服務':
-        location_event(event)
+        service_category_event(event)
 
 
 
