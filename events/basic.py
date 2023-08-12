@@ -12,7 +12,7 @@ def about_us_event(event):
             "emojiId": "225"
         },
         {
-            "index": 13,
+            "index": 14,
             "productId": "5ac21184040ab15980c9b43a",
             "emojiId": "225"
         }
@@ -24,7 +24,7 @@ def about_us_event(event):
                                    
 -長期美裝櫃姐配合有折扣
                                    
--好友推薦 請輸入 ID。""", emoji=emoji) 
+-好友推薦 請輸入 ID。""", emojis=emoji) 
     
     sticker_message = StickerSendMessage(
         package_id='6136',
