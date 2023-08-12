@@ -35,7 +35,7 @@ def service_category_event(event):
         alt_text='請選擇想服務類別',
         template=ImageCarouselTemplate(
             columns=[
-                ImageCarouselTemplate(
+                ImageCarouselColumn(
                     image_url='https://i.imgur.com/okeVTFf.jpg',
                     action=PostbackAction(
                         label='按摩調理',
