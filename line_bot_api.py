@@ -5,7 +5,9 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, FollowEvent, UnfollowEvent, StickerSendMessage, ImageSendMessage, LocationSendMessage
+    MessageEvent, TextMessage, TextSendMessage, FollowEvent, UnfollowEvent, StickerSendMessage, ImageSendMessage, LocationSendMessage,
+    FlexSendMessage,TemplateSendMessage,ImageCarouselTemplate,PostbackAction,ImageCarouselColumn
+
 )
 
 #Channel access token
