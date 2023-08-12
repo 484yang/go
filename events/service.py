@@ -38,17 +38,17 @@ def service_category_event(event):
                 ImageCarouselColumn(
                     image_url='https://i.imgur.com/okeVTFf.jpg',
                     action=PostbackAction(
-                        label='按摩調理',
-                        display_text='想了解按摩調理',
-                        data= 'action=service&category=按摩調理'
+                        label='美甲單色',
+                        display_text='想了解美甲單色',
+                        data= 'action=service&category=美甲單色'
                     )
                 ),
                 ImageCarouselColumn(
                     image_url='https://i.imgur.com/okeVTFf.jpg',
                     action=PostbackAction(
-                        label='按摩調理',
-                        display_text='想了解按摩調理',
-                        data= 'action=service&category=按摩調理'
+                        label='美甲單色',
+                        display_text='想了解美甲單色',
+                        data= 'action=service&category=美甲單色'
                     )
                 )
             ]
