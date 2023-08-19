@@ -83,7 +83,7 @@ def handle_postback(event):
     elif data.get('action') == 'select_date':
         service_select_date_event(event)
     elif data.get('action') == 'select_time':
-        service_select_date_event(event)
+        service_select_time_event(event)
 
 @handler.add(FollowEvent)
 def handle_follow(event):
