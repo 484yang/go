@@ -6,7 +6,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, FollowEvent, UnfollowEvent, StickerSendMessage, ImageSendMessage, LocationSendMessage,
-    FlexSendMessage,TemplateSendMessage,ImageCarouselTemplate,PostbackAction,ImageCarouselColumn,PostbackEvent
+    FlexSendMessage,TemplateSendMessage,ImageCarouselTemplate,PostbackAction,ImageCarouselColumn,PostbackEvent, QuickReplyButton,QuickReply
 
 )
 

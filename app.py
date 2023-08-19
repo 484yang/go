@@ -80,6 +80,10 @@ def handle_postback(event):
 
     if data.get('action') == 'service':
         service_event(event)
+    elif data.get('action') == 'service_date':
+        service_select_date_event(event)
+    elif data.get('action') == 'service_time':
+        service_select_date_event(event)
 
 @handler.add(FollowEvent)
 def handle_follow(event):
