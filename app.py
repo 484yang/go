@@ -14,8 +14,7 @@ app = Flask(__name__)
 
 
 app.config.from_object(os.environ.get('APP_SETTINGS', 'config.DevConfig'))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://text:dOYOKrAUebPz3oNCaOaVAdVEIR5DmX5r@dpg-cjbiobfdb61s7395gkcg-a.singapore-postgres.render.com/text_k3w9'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://gogo:IvhCW21qkB278n6ReG9Ri7erdnl8Y6rz@dpg-cjg2kr41ja0c739p5udg-a.singapore-postgres.render.com/aiai'
 db.app = app
 db.init_app(app)
 migrate.init_app(app,db)
@@ -58,7 +57,7 @@ def handle_message(event):
     print(user.id)
     print(user.line_id)
     print(user.display_name)
-    
+
 
     if message_text == '@關於我們':
         about_us_event(event)
