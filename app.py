@@ -4,12 +4,25 @@ from events.service import *
 from events.basic import*
 from line_bot_api import*
 
+from extensions import db,migrate
+from models.user import User
 
-
-
+import os
 
 
 app = Flask(__name__)
+
+
+app.config.from_object(os.environ.get('APP_SETTINGS', 'config.DevConfig'))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://text:dOYOKrAUebPz3oNCaOaVAdVEIR5DmX5r@dpg-cjbiobfdb61s7395gkcg-a.singapore-postgres.render.com/text_k3w9'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.app = app
+db.init_app(app)
+migrate.init_app(app,db)
+
+
+
+
 
 @app.route('/callback', methods=['POST'])
 def callback():
@@ -31,6 +44,21 @@ def callback():
 def handle_message(event):
 
     message_text = str(event.message.text).lower()
+    user = User.query.filter(User.line_id == event.source.user_id).first()
+    if not user:
+        profile = line_bot_api.get_profile(event.source.user_id)
+        print(profile.display_name)
+        print(profile.user_id)
+        print(profile.picture_url)
+
+        user = User(profile.user_id, profile.display_name, profile.picture_url)
+        db.session.add(user)
+        db.session.commit()
+    
+    print(user.id)
+    print(user.line_id)
+    print(user.display_name)
+    
 
     if message_text == '@關於我們':
         about_us_event(event)
