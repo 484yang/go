@@ -237,3 +237,91 @@ def service_select_time_event(event):
     line_bot_api.reply_message(
         event.reply_token,
         [text_message])
+    
+#confirm_template是用來確認,它包含了訊息和底下有兩個按鈕
+#PostbackAction可以帶data的資料,MessageAction則是用戶按下去時會直接傳訊息到聊天室
+def service_confirm_event(event):
+
+    data = dict(parse_qsl(event.postback.data))
+    booking_service = services[int(data['service_id'])]#取得要預約的服務項目資料,會出現1234對應到上面的service
+
+    confirm_template_message = TemplateSendMessage(
+        alt_text='請確認預約項目',
+        template=ConfirmTemplate(
+            text=f'您即將預約\n\n{booking_service["title"]} {booking_service["duration"]}\n預約時段: {data["date"]} {data["time"]}\n\n確認沒問題請按【確定】',
+            actions=[
+                PostbackAction(
+                    label='確定',
+                    display_text='確認沒問題!',
+                    data=f'action=confirmed&service_id={data["service_id"]}&date={data["date"]}&time={data["time"]}'
+                ),
+                MessageAction(
+                    label='重新預約',
+                    text='我想重新預約'
+                )
+            ]
+        )
+    )
+    line_bot_api.reply_message(
+        event.reply_token,
+        [confirm_template_message])
+
+#取消用的是ButtonsTemplat,有訊息的標題和訊息的內容
+#action中可以設定一到四個按鈕
+#這個function是判斷用戶是否預約過,利用Reservation.query.filter搜尋資料,條件是user_id == user.id
+def is_booked(event, user):
+    reservation = Reservation.query.filter(Reservation.user_id == user.id,
+                                           Reservation.is_canceled.is_(False),#代表沒有被取消
+                                           Reservation.booking_datetime > datetime.datetime.now()).first()
+                                           #需要大於當下的時間.first()是會回傳第一筆資料
+    if reservation:#text顯示預約項目名稱和服務時段
+        buttons_template_message = TemplateSendMessage(
+            alt_text='您已經有預約了，是否需要取消?',
+            template=ButtonsTemplate(
+                title='您已經有預約了',
+                text=f'{reservation.booking_service}\n預約時段: {reservation.booking_datetime}',
+                actions=[
+                    PostbackAction(
+                        label='我想取消預約',
+                        display_text='我想取消預約',
+                        data='action=cancel'
+                    )
+                ]
+            )
+        )
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            [buttons_template_message])
+
+        return True
+    else:
+        return False
+
+
+
+
+
+
+def service_confirmed_event(event):
+    data = dict(parse_qsl(event.postback.data))
+
+    booking_service = services[int(data['service_id'])]
+    booking_datetime = datetime.datetime.strptime(f'{data["date"]} {data["time"]}', '%Y-%m-%d %H:%M')
+
+    user = User.query.filter(User.line_id == event.source.user_id).first()
+    if is_booked(event, user):
+        return
+
+    reservation = Reservation(
+        user_id=user.id,
+        booking_service_category=f'{booking_service["category"]}',
+        booking_service=f'{booking_service["title"]} {booking_service["duration"]}',
+        booking_datetime=booking_datetime)
+
+    db.session.add(reservation)
+    db.session.commit()
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        [TextSendMessage(text='沒問題! 感謝您的預約，我已經幫你預約成功了喔，到時候見!')])
