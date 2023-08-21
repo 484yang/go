@@ -64,7 +64,7 @@ def service_category_event(event):
                     action=PostbackAction(
                         label='美甲多色',
                         display_text='想了解美甲多色',
-                        data= 'action=service&category=美甲單色'
+                        data= 'action=service&category=美甲多色'
                     )
                 )
             ]
