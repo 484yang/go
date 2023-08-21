@@ -91,8 +91,8 @@ def handle_postback(event):
 
 @handler.add(FollowEvent)
 def handle_follow(event):
-    welcome_msg = """ 你好我是 歡迎你成為 XXX每架俱樂部會員 !
-我是XXX美甲俱樂部 的小幫手
+    welcome_msg = """ 你好我是 歡迎你成為 享甲樂俱樂部會員 !
+我是享甲樂美甲俱樂部 的小幫手
 -想直接預約 線上美甲服務 可直接點選下方
 -[你的小幫手]選單功能
     
