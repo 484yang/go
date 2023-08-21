@@ -9,37 +9,37 @@ from models.reservation import Reservation
 services = {
     1: {
         'category': '美甲單色',
-        'img_url': 'https://drive.google.com/uc?export=download&id=15ftd3m_rOX3Op_js9B5OCiz2a4KyQfXi',
-        'title': '按摩調理（指壓／精油）',
-        'duration': '90min',
-        'description': '深層肌肉緊繃痠痛、工作壓力和緊繃情緒、身體疲勞者，想解除肌肉緊繃僵硬不適感',
-        'price': 2000,
+        'img_url': 'https://i.imgur.com/spByDbp.jpg',
+        'title': '單色（可跳一色)',
+        'duration': '三天',
+        'description': '在手指上小心機,閨密出門不會輸',
+        'price': 350,
         'post_url': 'https://linecorp.com'
     },
     2: {
         'category': '美甲單色',
-        'img_url': 'https://drive.google.com/uc?export=download&id=1naYV7ySDy1PBTR9_smzchSu3xPfuKRYO',
-        'title': '運動按摩（按摩與伸展）',
-        'duration': '90min',
-        'description': '全身肌肉按摩放鬆與伸展，能夠改善運動後引發的延遲性痠痛，血液循環流通順暢',
-        'price': 1500,
+        'img_url': 'https://i.imgur.com/vGTLtau.jpg',
+        'title': '單色造型（魔鏡粉/極光粉/貼紙/飾品）',
+        'duration': '三天',
+        'description': '在素色上加上變化,低調又奢華',
+        'price': 400,
         'post_url': 'https://linecorp.com'
     },
     3: {
-        'category': '美甲單色',
-        'img_url': 'https://drive.google.com/uc?export=download&id=1dOiR8rnSski88B7s8tEClN6bR4OXP2VY',
-        'title': '熱石精油紓壓',
-        'duration': '90min',
-        'description': '「火山石」成份含有豐富礦物質及獨特的自然能量，溫熱觸感能活絡循環，鬆解疲勞感，舒緩肌肉緊繃',
-        'price': 2000,
+        'category': '美甲多色',
+        'img_url': 'https://i.imgur.com/RdZKHGa.jpg',
+        'title': '多色造型(隨意搭配)',
+        'duration': '五天',
+        'description': '桌子上的水彩筆,在指尖上跳舞美麗又耀眼',
+        'price': 850,
         'post_url': 'https://linecorp.com'
     },
     4: {
-        'category': '美甲單色',
-        'img_url': 'https://drive.google.com/uc?export=download&id=1j9k2ivv1D3DwthQABmiI-PLsn6pN7sIZ',
-        'title': '粉刺淨化 + 深層保濕',
-        'duration': '90min',
-        'description': '臉部淨化，粉刺淨化 + 深層保濕繃',
+        'category': '美甲多色',
+        'img_url': 'https://i.imgur.com/s0bN5Hu.jpg',
+        'title': '多色造型(加長)',
+        'duration': '五天',
+        'description': '厭惡普通,無趣?',
         'price': 1500,
         'post_url': 'https://linecorp.com'
     },
@@ -52,7 +52,7 @@ def service_category_event(event):
         template=ImageCarouselTemplate(
             columns=[
                 ImageCarouselColumn(
-                    image_url='https://i.imgur.com/okeVTFf.jpg',
+                    image_url='https://i.imgur.com/qWopt5L.jpg',
                     action=PostbackAction(
                         label='美甲單色',
                         display_text='想了解美甲單色',
@@ -60,10 +60,10 @@ def service_category_event(event):
                     )
                 ),
                 ImageCarouselColumn(
-                    image_url='https://i.imgur.com/okeVTFf.jpg',
+                    image_url='https://i.imgur.com/lDcAljM.jpg',
                     action=PostbackAction(
-                        label='美甲單色',
-                        display_text='想了解美甲單色',
+                        label='美甲多色',
+                        display_text='想了解美甲多色',
                         data= 'action=service&category=美甲單色'
                     )
                 )
@@ -297,11 +297,6 @@ def is_booked(event, user):
         return True
     else:
         return False
-
-
-
-
-
 
 def service_confirmed_event(event):
     data = dict(parse_qsl(event.postback.data))
