@@ -320,3 +320,27 @@ def service_confirmed_event(event):
     line_bot_api.reply_message(
         event.reply_token,
         [TextSendMessage(text='沒問題! 感謝您的預約，我已經幫你預約成功了喔，到時候見!')])
+    
+def service_cancel_event(event):
+
+    user = User.query.filter(User.line_id == event.source.user_id).first()
+    reservation = Reservation.query.filter(Reservation.user_id == user.id,
+                                           Reservation.is_canceled.is_(False),
+                                           Reservation.booking_datetime > datetime.datetime.now()).first()
+    if reservation:
+        reservation.is_canceled = True
+
+        db.session.add(reservation)
+        db.session.commit()
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            [TextSendMessage(text='你的預約已經幫你取消了')])
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            [TextSendMessage(text='你目前沒有預約喔')])
+    
+
+#def test_event(event):
+    #flex_message = FlexSendMessage()

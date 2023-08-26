@@ -72,6 +72,8 @@ def handle_message(event):
             return
         if message_text in ['*data','*d']:
             list_reservation_event(event)
+    #   elif message_text in ['*group','*g']:
+          #  create_audience_group(event)
 
 
 @handler.add(PostbackEvent)
@@ -88,6 +90,17 @@ def handle_postback(event):
         service_confirm_event(event)
     elif data.get('action') == 'confirmed':
         service_confirmed_event(event)
+    elif data.get('action') == 'cancel':
+        service_cancel_event(event)
+
+
+ #   print('action', data.get('action'))
+ #   print('category', data.get('category'))
+ #   print('service_id', data.get('service_id'))
+ #   print('data', data.get('data'))
+ #   print('time', data.get('time')) 
+  
+
 
 @handler.add(FollowEvent)
 def handle_follow(event):
